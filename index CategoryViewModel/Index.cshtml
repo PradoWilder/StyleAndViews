@@ -1,0 +1,223 @@
+﻿@model IEnumerable<PayUPayMe.ViewModels.CategoryViewModel>
+
+@{
+    ViewData["Title"] = "Liste des catégories";
+    var totalCategories = Model.Count();
+}
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/categoryList.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+</head>
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <p>
+        <a asp-action="Create" class="btn btn-primary btn-sm">Create New</a>
+    </p>
+    <p>Nombre total de catégories : @totalCategories</p>
+    <div class="owl-carousel owl-theme">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <div class="item">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@item.Name</h5>
+                            <div class="mt-auto">
+                                <a asp-action="Edit" asp-route-id="@item.CategoryId" class="btn btn-success btn-sm">Edit</a>
+                                <a asp-action="Details" asp-route-id="@item.CategoryId" class="btn btn-info btn-sm">Details</a>
+                                <a asp-action="Delete" asp-route-id="@item.CategoryId" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="alert alert-warning" role="alert">
+                Not in Database
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Initialize Owl Carousel
+            $('.owl-carousel').owlCarousel({
+                loop: false,
+                margin: 10,
+                nav: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    }
+                }
+            });
+
+            // Set all cards to the same height
+            function setEqualHeight() {
+                var maxHeight = 0;
+                $('.card').each(function () {
+                    var cardHeight = $(this).outerHeight();
+                    if (cardHeight > maxHeight) {
+                        maxHeight = cardHeight;
+                    }
+                });
+                $('.card').css('height', maxHeight + 'px');
+            }
+
+            setEqualHeight();
+            $(window).resize(function () {
+                $('.card').css('height', 'auto'); // Reset height
+                setEqualHeight(); // Reapply equal height
+            });
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* @model IEnumerable<PayUPayMe.ViewModels.CategoryViewModel>
+
+@{
+    ViewData["Title"] = "Liste des catégories";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/categoryList.css" />
+</head>
+
+<div class="container">
+    <h1>Liste des catégories</h1>
+    <p>
+        <a asp-action="Create" class="btn">Create New</a>
+    </p>
+    <table class="table table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td class="action-buttons">
+                            <a asp-action="Edit" asp-route-id="@item.CategoryId" class="btn btn-success btn-action">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.CategoryId" class="btn btn-info btn-action">Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.CategoryId" class="btn btn-danger btn-action">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="2">
+                        <div>Not in Database</div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div> *@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* @model IEnumerable<PayUPayMe.ViewModels.CategoryViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CategoryId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CategoryId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CategoryId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+ </table> *@
